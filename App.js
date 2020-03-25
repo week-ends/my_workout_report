@@ -8,7 +8,8 @@ import {
   Dimensions,
   Platform,
   ScrollView,
-  AsyncStorage
+  AsyncStorage,
+  FlatList
 } from "react-native";
 import { AppLoading } from "expo";
 const { height, width } = Dimensions.get("window");
@@ -19,14 +20,24 @@ const { height, width } = Dimensions.get("window");
 // import RoutineHead from "./components/RoutineHead.js";
 // import RoutineBody from "./components/RoutineBody.js";
 import Item from "./components/Item";
-import { Icon } from "native-base"; // 추가된 코드
+import NavWeight from "./components/NavWeight";
 
 // const store = createStore(allReducers);
 
 export default function App() {
+  const today = new Date();
+  const dateString = today.toLocaleDateString("ko-KR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  });
+  const dayName = today.toLocaleDateString("ko-KR", { weekday: "long" });
   const [newWorkoutItem, setNewWorkoutItem] = useState("");
   const [state, setState] = useState({
-    items: { a: 0, b: 0 }
+    items: {
+      Squat: { workoutName: "Squat", set: 1 },
+      BenchPress: { workoutName: "BenchPress", set: 1 }
+    }
   });
 
   // componentDidMount = ()=>{
@@ -44,10 +55,9 @@ export default function App() {
     <View style={styles.container}>
       <View style={styles.card}>
         <View style={styles.routineHead}>
-          <Icon name="ios-camera" style={{ paddingLeft: 10 }} />
           <Text style={styles.dayString}>
-            2020년 3월 24일
-            <Text style={styles.dayName}>화요일</Text>
+            {dateString}
+            <Text style={styles.dayName}>{dayName}</Text>
           </Text>
           <View style={styles.inputBlock}>
             <TextInput
@@ -55,7 +65,7 @@ export default function App() {
               placeholder={"Input Your Item"}
               value={newWorkoutItem}
               onChangeText={onChangeItem}
-              placeholderTextColor={"#343a40"}
+              placeholderTextColor={"#757575"}
               returnKeyType={"done"}
               autoCorrect={false}
               // onSubmitEditing={this._addToDo}
@@ -67,6 +77,7 @@ export default function App() {
             {Object.values(state.items).map(item => (
               <Item
                 key={item.id}
+                items={item}
                 // deleteToDo={this._deleteItem}
                 // uncompleteToDo={this._uncompleteItem}
                 // completeToDo={this._completeItem}
@@ -77,12 +88,8 @@ export default function App() {
           </ScrollView>
         </View>
       </View>
+      <NavWeight />
     </View>
-    // <View style={styles.container}>
-    //   <Provider store={store}>
-    //     <Counter />
-    //   </Provider>
-    // </View>
   );
 }
 

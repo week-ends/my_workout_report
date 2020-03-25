@@ -1,11 +1,13 @@
 import React from "react";
 import { Text, View, StyleSheet, Dimensions } from "react-native";
 
-export default function Item() {
+export default function Item(item) {
+  console.log(item.items);
   return (
     <View style={styles.container}>
-      <Text style={styles.workoutName}>WorkoutName</Text>
-      <Text style={styles.button}>Button</Text>
+      <Text style={styles.workoutName}>{item.items.workoutName}</Text>
+      <Text style={styles.workoutName}>{item.items.set}</Text>
+      <Text style={styles.button}>20</Text>
     </View>
   );
 }
@@ -16,7 +18,9 @@ const styles = StyleSheet.create({
     color: "#343a40"
   },
   workoutName: {
-    fontSize: 24
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#343a40"
   },
   button: {
     width: 20,
