@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import countReducer from "./countReducer.js";
+import routines from "./routines.js";
 
 const allReducers = combineReducers({
-  countReducer
+  routines
 });
 
 export default allReducers;
