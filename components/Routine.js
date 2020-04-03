@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import Item from "./Item";
 import NavWeight from "./NavWeight";
+import Card from "./Card";
 import { MaterialIcons } from "@expo/vector-icons";
 // import { Icon } from "native-base";
 // import { Provider } from "react-redux";
@@ -83,7 +84,7 @@ export default function Routine() {
   };
   return (
     <View style={styles.container}>
-      <View style={styles.card}>
+      <View style={styles.routineBlock}>
         <View style={styles.routineHead}>
           <Text style={styles.dayString}>
             {dateString}
@@ -106,15 +107,12 @@ export default function Routine() {
           </View>
         </View>
         <View style={styles.routineBody}>
-          {/* <ScrollView contentContainerStyle={styles.workoutItemList}> */}
           <FlatList
+            keyExtractor={routineList.key}
             style={styles.workoutItemList}
             data={routineList[0].workoutList}
             renderItem={({ item }) => <Item item={item} />}
           />
-
-          {/* <Item state={routineList} /> */}
-          {/* </ScrollView> */}
         </View>
       </View>
 
@@ -126,47 +124,19 @@ export default function Routine() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: "#e9ecef",
-    backgroundColor: "#343a40",
-    alignItems: "center"
+    alignItems: "center",
+    backgroundColor: "#fff"
   },
-  card: {
-    // flexDirection: column,
-
-    width: width - 25,
-    maxWidth: 1025,
-    height: 600,
-    minHeight: 450,
-
-    // marginLeft: auto,
-    // marginRight: auto,
-    marginTop: 96,
-    marginBottom: 150,
-
-    backgroundColor: "#fff",
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
-    borderBottomLeftRadius: 15,
-    borderBottomRightRadius: 15,
-
-    ...Platform.select({
-      ios: {
-        shadowColor: "rgb(50, 50, 50)",
-        shadowOpacity: 0.05,
-        shadowRadius: 5,
-        shadowOffset: {
-          height: 8,
-          width: 0
-        }
-      },
-      android: {
-        elevation: 3
-      }
-    })
+  routineBlock: {
+    flex: 1
   },
   //Routine Head
   routineHead: {
-    padding: 32,
+    width: width,
+    paddingTop: 50,
+    paddingBottom: 50,
+    paddingLeft: 32,
+    paddingRight: 32,
     borderBottomColor: "#e9ecef",
     borderBottomWidth: 1
   },
@@ -205,7 +175,11 @@ const styles = StyleSheet.create({
   //Routine Body
   routineBody: {
     flex: 1,
-    padding: 32
+    width: width,
+    paddingTop: 32,
+    paddingBottom: 32,
+    paddingLeft: 32,
+    paddingRight: 32
   },
   workoutItemList: {
     // alignItems: "center"

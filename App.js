@@ -1,40 +1,62 @@
-import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, StatusBar, Dimensions } from "react-native";
-import { AppLoading } from "expo";
-const { height, width } = Dimensions.get("window");
-// import { Icon } from "native-base";
-// import { Provider } from "react-redux";
-// import RoutineHead from "./components/RoutineHead.js";
-// import RoutineBody from "./components/RoutineBody.js";
-import Loading from "./components/Loading";
-import Routine from "./components/Routine";
-
-import "react-native-gesture-handler";
+import * as React from "react";
+import { Platform, StatusBar, StyleSheet, View } from "react-native";
+import { SplashScreen } from "expo";
+import * as Font from "expo-font";
+import { Ionicons } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
-import MainScreen from "./screens/MainScreen";
+import { createStackNavigator } from "@react-navigation/stack";
 
-// import { createStore } from "redux";
-// import allReducers from "./reducers";
-// const store = createStore(allReducers);
+import BottomTabNavigator from "./navigation/BottomTabNavigator";
+import useLinking from "./navigation/useLinking";
 
-export default class App extends React.Component {
-  state = {
-    loaded: true
-  };
-  componentDidMount = () => {
-    this.setState({ loaded: false });
-  };
+const Stack = createStackNavigator();
 
-  render() {
-    const { loaded } = this.state;
-    if (!loaded) {
-      return <Loading />;
+export default function App(props) {
+  const [isLoadingComplete, setLoadingComplete] = React.useState(false);
+  const [initialNavigationState, setInitialNavigationState] = React.useState();
+  const containerRef = React.useRef();
+  const { getInitialState } = useLinking(containerRef);
+
+  // Load any resources or data that we need prior to rendering the app
+  React.useEffect(() => {
+    async function loadResourcesAndDataAsync() {
+      try {
+        SplashScreen.preventAutoHide();
+
+        // Load our initial navigation state
+        setInitialNavigationState(await getInitialState());
+
+        // Load fonts
+        await Font.loadAsync({
+          ...Ionicons.font,
+          "space-mono": require("./assets/fonts/SpaceMono-Regular.ttf")
+        });
+      } catch (e) {
+        // We might want to provide this error information to an error reporting service
+        console.warn(e);
+      } finally {
+        setLoadingComplete(true);
+        SplashScreen.hide();
+      }
     }
+
+    loadResourcesAndDataAsync();
+  }, []);
+
+  if (!isLoadingComplete && !props.skipLoadingScreen) {
+    return null;
+  } else {
     return (
       <View style={styles.container}>
-        <StatusBar barStyle="light-content" />
-        {/* <Routine /> */}
-        <MainScreen />
+        {Platform.OS === "ios" && <StatusBar barStyle="dark-content" />}
+        <NavigationContainer
+          ref={containerRef}
+          initialState={initialNavigationState}
+        >
+          <Stack.Navigator>
+            <Stack.Screen name="Root" component={BottomTabNavigator} />
+          </Stack.Navigator>
+        </NavigationContainer>
       </View>
     );
   }
@@ -42,6 +64,7 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: "#fff"
   }
 });
