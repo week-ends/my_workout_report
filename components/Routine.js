@@ -9,11 +9,12 @@ import {
   ScrollView,
   TouchableOpacity,
   Alert,
-  FlatList
+  FlatList,
 } from "react-native";
 import Item from "./Item";
 import NavWeight from "./NavWeight";
 import Card from "./Card";
+import Data from "../constants/Data";
 import { MaterialIcons } from "@expo/vector-icons";
 // import { Icon } from "native-base";
 // import { Provider } from "react-redux";
@@ -26,54 +27,18 @@ const { height, width } = Dimensions.get("window");
 // const store = createStore(allReducers);
 
 export default function Routine() {
+  const [newWorkoutItem, setNewWorkoutItem] = useState("");
+  const [routineList, setRoutineList] = useState(Data);
+
   const today = new Date();
   const dateString = today.toLocaleDateString("ko-KR", {
     year: "numeric",
     month: "long",
-    day: "numeric"
+    day: "numeric",
   });
   const dayName = today.toLocaleDateString("ko-KR", { weekday: "long" });
-  const [newWorkoutItem, setNewWorkoutItem] = useState("");
-  const [routineList, setRoutineList] = useState([
-    {
-      key: "1",
-      createdAt: dateString,
-      dayName: dayName,
-      workoutList: [
-        {
-          code: "squat",
-          name: "Squat",
-          setList: [
-            { set: 1, weight: 20, reps: 20 },
-            { set: 2, weight: 40, reps: 6 },
-            { set: 3, weight: 60, reps: 2 },
-            { set: 4, weight: 75, reps: 5 },
-            { set: 5, weight: 80, reps: 5 },
-            { set: 6, weight: 85, reps: 5 },
-            { set: 7, weight: 85, reps: 5 }
-          ]
-        },
-        {
-          code: "benchpress",
-          name: "BenchPress",
-          setList: [
-            { set: 1, weight: 0, reps: 0 },
-            { set: 2, weight: 0, reps: 0 }
-          ]
-        },
-        {
-          code: "deadlift",
-          name: "Deadlift",
-          setList: [
-            { set: 1, weight: 0, reps: 0 },
-            { set: 2, weight: 0, reps: 0 }
-          ]
-        }
-      ]
-    }
-  ]);
 
-  const onChangeItem = text => {
+  const onChangeItem = (text) => {
     setNewWorkoutItem(text);
   };
   const onAddItem = () => {
@@ -107,12 +72,13 @@ export default function Routine() {
           </View>
         </View>
         <View style={styles.routineBody}>
-          <FlatList
-            keyExtractor={routineList.key}
+          <Item />
+          {/* <FlatList
             style={styles.workoutItemList}
             data={routineList[0].workoutList}
             renderItem={({ item }) => <Item item={item} />}
-          />
+            keyExtractor={(item, index) => item.code.toString()}
+          /> */}
         </View>
       </View>
 
@@ -125,10 +91,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
   },
   routineBlock: {
-    flex: 1
+    flex: 1,
   },
   //Routine Head
   routineHead: {
@@ -138,7 +104,7 @@ const styles = StyleSheet.create({
     paddingLeft: 32,
     paddingRight: 32,
     borderBottomColor: "#e9ecef",
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
   },
   inputBlock: {
     paddingTop: 5,
@@ -151,7 +117,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
 
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
   },
   input: {
     flex: 1,
@@ -159,18 +125,18 @@ const styles = StyleSheet.create({
 
     fontSize: 24,
     color: "#343a40",
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   dayString: {
     margin: 0,
     fontSize: 24,
     fontWeight: "bold",
-    color: "#343a40"
+    color: "#343a40",
   },
   dayName: {
     fontSize: 21,
     fontWeight: "bold",
-    color: "#868e96"
+    color: "#868e96",
   },
   //Routine Body
   routineBody: {
@@ -179,15 +145,15 @@ const styles = StyleSheet.create({
     paddingTop: 32,
     paddingBottom: 32,
     paddingLeft: 32,
-    paddingRight: 32
+    paddingRight: 32,
   },
   workoutItemList: {
     // alignItems: "center"
   },
   workoutName: {
-    fontSize: 24
+    fontSize: 24,
   },
   workoutSet: {
-    fontSize: 24
-  }
+    fontSize: 24,
+  },
 });

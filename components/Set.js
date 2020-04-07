@@ -4,11 +4,11 @@ import {
   View,
   StyleSheet,
   Dimensions,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
 
-export default function Set(set) {
-  //   console.log(set);
+export default function Set({ set }) {
+  // console.log(set);
   const [reps, setReps] = useState(0);
   const onIncrement = () => {
     setReps(reps + 1);
@@ -25,7 +25,7 @@ export default function Set(set) {
 const styles = StyleSheet.create({
   container: {
     marginBottom: 20,
-    color: "#343a40"
+    color: "#343a40",
   },
   button: {
     flex: 1,
@@ -38,11 +38,11 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 50,
     borderBottomLeftRadius: 50,
     borderBottomRightRadius: 50,
-    backgroundColor: "#ccc"
+    backgroundColor: "#ccc",
   },
   buttonText: {
     fontSize: 20,
     fontWeight: "bold",
-    color: "#333"
-  }
+    color: "#333",
+  },
 });

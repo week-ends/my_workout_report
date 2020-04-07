@@ -2,6 +2,7 @@
   "expo": {
     "name": "my_workout_report",
     "slug": "my_workout_report",
+    "scheme": "myapp",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": ["ios", "android", "web"],
