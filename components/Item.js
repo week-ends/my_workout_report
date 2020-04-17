@@ -11,16 +11,23 @@ import { MaterialIcons } from "@expo/vector-icons";
 import Set from "./Set";
 import Data from "../constants/Data";
 
-export default function Item() {
-  //console.log(Data[0].workoutList[0].setList);
-
+export default function Item({ item }) {
   return (
     <View style={styles.container}>
       <Text style={styles.workoutName}>
-        {Data[0].workoutList[0].name}
+        {item.name}
         <MaterialIcons name="delete" size={20} color={"#343a40"} />
       </Text>
-      <FlatList
+      <View>
+        {item.setList.map((set, index) => {
+          return (
+            <Text style={styles.workoutDesc} key={index.toString()}>
+              {set.set}set{set.weight}kg{set.reps}reps
+            </Text>
+          );
+        })}
+      </View>
+      {/* <FlatList
         data={Data[0].workoutList[0].setList}
         renderItem={({ item }) => (
           <Text style={styles.workoutDesc}>
@@ -28,17 +35,20 @@ export default function Item() {
           </Text>
         )}
         keyExtractor={(item, index) => item.set.toString()}
-      />
+      /> */}
       <View style={styles.setList}>
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>+</Text>
         </TouchableOpacity>
-        <FlatList
+        {item.setList.map((set, index) => {
+          return <Set key={index} set={set} />;
+        })}
+        {/* <FlatList
           style={styles.setList}
           data={Data[0].workoutList[0].setList}
-          renderItem={({ item }) => <Set set={item} />}
+          renderItem={({ item }) => <Set item={item.reps} />}
           keyExtractor={(item, index) => item.set.toString()}
-        />
+        /> */}
       </View>
     </View>
   );

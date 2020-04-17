@@ -47,6 +47,13 @@ export default function Routine() {
       : //addActions
         null;
   };
+
+  console.log(routineList[0].workoutList[0].code);
+  const _data = [
+    { key: "AAA", name: "squat" },
+    { key: "AAB", name: "benchpress" },
+    { key: "AAC", name: "deadlift" },
+  ];
   return (
     <View style={styles.container}>
       <View style={styles.routineBlock}>
@@ -72,13 +79,13 @@ export default function Routine() {
           </View>
         </View>
         <View style={styles.routineBody}>
-          <Item />
-          {/* <FlatList
-            style={styles.workoutItemList}
-            data={routineList[0].workoutList}
-            renderItem={({ item }) => <Item item={item} />}
-            keyExtractor={(item, index) => item.code.toString()}
-          /> */}
+          <ScrollView>
+            {routineList[0].workoutList.map((item, index) => (
+              <Item key={index.toString()} item={item}>
+                {item.code}
+              </Item>
+            ))}
+          </ScrollView>
         </View>
       </View>
 
