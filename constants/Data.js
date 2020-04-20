@@ -13,33 +13,31 @@ export default [
     dayName: dayName,
     workoutList: [
       {
-        code: "pullup",
-        name: "Pull Up",
-        setList: [
-          { set: 1, reps: 8, weight: 0 },
-          { set: 2, reps: 8, weight: 0 },
-          { set: 3, reps: 12, weight: 40 },
-          { set: 4, reps: 12, weight: 40 },
-          { set: 5, reps: 12, weight: 40 },
-        ],
-      },
-      {
-        code: "sidelateralraise",
-        name: "Side Lateral Raise",
-        setList: [
-          { set: 1, reps: 12, weight: 10 },
-          { set: 2, reps: 12, weight: 10 },
-          { set: 3, reps: 12, weight: 8 },
-          { set: 4, reps: 12, weight: 8 },
-          { set: 5, reps: 12, weight: 8 },
-          { set: 6, reps: 12, weight: 6 },
-          { set: 7, reps: 12, weight: 6 },
-          { set: 8, reps: 20, weight: 3 },
-        ],
-      },
-      {
         code: "squat",
         name: "Squat",
+        setList: [
+          { set: 1, weight: 20, reps: 20 },
+          { set: 2, weight: 40, reps: 6 },
+          { set: 3, weight: 60, reps: 2 },
+          { set: 4, weight: 75, reps: 5 },
+          { set: 5, weight: 80, reps: 5 },
+          { set: 6, weight: 85, reps: 5 },
+          { set: 7, weight: 85, reps: 5 },
+        ],
+      },
+      {
+        code: "benchpress",
+        name: "BenchPress",
+        setList: [
+          { set: 1, weight: 20, reps: 20 },
+          { set: 2, weight: 40, reps: 6 },
+          { set: 3, weight: 60, reps: 2 },
+          { set: 4, weight: 75, reps: 5 },
+        ],
+      },
+      {
+        code: "deadlift",
+        name: "Deadlift",
         setList: [
           { set: 1, weight: 20, reps: 20 },
           { set: 2, weight: 40, reps: 6 },

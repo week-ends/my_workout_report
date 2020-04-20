@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import {
   Text,
   View,
@@ -8,13 +8,15 @@ import {
 } from "react-native";
 
 export default function Set({ set }) {
+  // console.log(set);
+  const [reps, setReps] = useState(0);
   const onIncrement = () => {
-    console.log(set.reps);
+    setReps(reps + 1);
   };
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.button} onPress={onIncrement}>
-        <Text style={styles.buttonText}>{set.reps}</Text>
+        <Text style={styles.buttonText}>{reps}</Text>
       </TouchableOpacity>
     </View>
   );
