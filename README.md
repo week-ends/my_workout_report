@@ -1,12 +1,16 @@
 # <진행중> my_workout_report
 
-This project was made with [Expo](https://expo.io/).
+This project was made with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Goal
 
 #### Now In Progress
 
-1. UI 구현
+1. reps 해결
+2. set 삭제 버튼 및 기능
+3. 제목 수정기능
+4. styling
+5. 같은 세트에서 무게가 다를 때 처리
 
 #### Step 1 - Fousing on Writing
 
@@ -32,7 +36,6 @@ This project was made with [Expo](https://expo.io/).
 
 ## Execute
 
-App 'Expo' required.
 'Node.js' required.
 
 현재 디렉토리에서 아래 명령어를 입력한다.
@@ -42,7 +45,37 @@ yarn install
 yarn start
 ```
 
-브라우저에 실행된 웹페이지의<br />
-QR코드를 Expo앱이 설치된 모바일기기로 스캔하여 구동된 상태를 확인한다.
+개발모드로 웹앱이 실행되며<br />
+[http://localhost:3000](http://localhost:3000)를 통해 웹앱을 볼 수 있다.
 
 수정사항이 발생시 웹페이지는 자동새로고침된다.<br />
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+
+### Analyzing the Bundle Size
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+
+### Making a Progressive Web App
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+
+### Advanced Configuration
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+
+### Deployment
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+
+### `yarn build` fails to minify
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

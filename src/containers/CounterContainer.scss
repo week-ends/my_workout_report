@@ -1,0 +1,60 @@
+$gray: #ccc;
+
+.SetterNav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+
+  display: flex;
+  background-color: #ffffff;
+
+  & > .Setter {
+    display: flex;
+    flex: 1;
+  }
+  input {
+    width: 100%;
+    border: none;
+    font-size: 2rem;
+    text-align: center;
+  }
+  .Setter > div {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.Button-Count- {
+  &Up,
+  &Down {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+
+    background: $gray;
+    &:hover {
+      background: lighten($gray, 10%);
+    }
+    &:active {
+      background: darken($gray, 10%);
+    }
+  }
+}
+
+@media (max-width: 720px) {
+  .SetterNav {
+  }
+  .SetterNav {
+    input {
+      font-size: 18px;
+      font-weight: bold;
+    }
+  }
+}
