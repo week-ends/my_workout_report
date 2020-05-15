@@ -23,6 +23,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 // import RoutineHead from "./components/RoutineHead.js";
 // import RoutineBody from "./components/RoutineBody.js";
 const { height, width } = Dimensions.get("window");
+import { useDispatch, useSelector } from "react-redux";
 
 // const store = createStore(allReducers);
 
@@ -38,6 +39,10 @@ export default function Routine() {
   });
   const dayName = today.toLocaleDateString("ko-KR", { weekday: "long" });
 
+  //모듈로 액션 보내기
+  const dispatch = useDispatch();
+  const onAddWorkout = (text) => dispatch(addWorkout(text));
+
   const onChangeItem = (text) => {
     setNewWorkoutItem(text);
   };
@@ -45,8 +50,14 @@ export default function Routine() {
     newWorkoutItem.length === 0
       ? Alert.alert("Please input your workout")
       : //addActions
-        null;
+
+        console.log("addItem");
+    onAddWorkout(newWorkoutItem);
+    null;
   };
+
+  const state = useSelector((state) => state);
+  console.log(state.routines);
   return (
     <View style={styles.container}>
       <View style={styles.routineBlock}>

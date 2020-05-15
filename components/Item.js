@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import Set from "./Set";
-import Data from "../constants/Data";
+// import Data from "../constants/Data";
 
 export default function Item() {
   //console.log(Data[0].workoutList[0].setList);
@@ -20,25 +20,14 @@ export default function Item() {
         {Data[0].workoutList[0].name}
         <MaterialIcons name="delete" size={20} color={"#343a40"} />
       </Text>
-      <FlatList
-        data={Data[0].workoutList[0].setList}
-        renderItem={({ item }) => (
-          <Text style={styles.workoutDesc}>
-            {item.set}set{item.weight}kg{item.reps}reps
-          </Text>
-        )}
-        keyExtractor={(item, index) => item.set.toString()}
-      />
-      <View style={styles.setList}>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>+</Text>
-        </TouchableOpacity>
-        <FlatList
-          style={styles.setList}
-          data={Data[0].workoutList[0].setList}
-          renderItem={({ item }) => <Set set={item} />}
-          keyExtractor={(item, index) => item.set.toString()}
-        />
+      <View>
+        {Object.values(item.setList).map((set, index) => {
+          return (
+            <Text style={styles.workoutDesc} key={index.toString()}>
+              {set.set}set&nbsp;{set.weight}kg&nbsp;{set.reps}reps
+            </Text>
+          );
+        })}
       </View>
     </View>
   );
